@@ -14,8 +14,8 @@ Sipaling is a web application that predicts stock prices using an LSTM deep lear
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/stock-price-prediction-app.git
-    cd stock-price-prediction-app
+    git clone https://github.com/ramadhanep/sipaling.git
+    cd sipaling
     ```
 
 2. Install the required packages:
