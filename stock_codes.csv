@@ -1,4 +1,5 @@
-Kode Saham,Nama Perusahaan
+Kode,Nama
+IDR=X,USD/IDR
 BBCA.JK,Bank Central Asia
 BBRI.JK,Bank Rakyat Indonesia
 BMRI.JK,Bank Mandiri
@@ -6,18 +7,201 @@ BBNI.JK,Bank Negara Indonesia
 ASII.JK,Astra International
 BTC-USD,Bitcoin
 ETH-USD,Ethereum
-SOL-USD,Solana
+tUSDT-USD,Tether
 BNB-USD,BNB
+SOL-USD,Solana
+STETH-USD,Lido Staked ETH
+USDC-USD,USD Coin
+XRP-USD,XRP
 DOGE-USD,Dogecoin
-XRP-USD,Ripple
-PEPE-USD,Pepe
-BONK-USD,BONK
-WIF-USD,Dog Wif Hat
-ONDO-USD,Ondo
-MANTA-USD,Manta
-LINK-USD,Chain Link
-NEAR-USD,Near Protocol
-ARB-USD,Arbitrum
+ADA-USD,Cardano
+TON11419-USD,Toncoin
+SHIB-USD,Shiba Inu
 AVAX-USD,Avalanche
+WSTETH-USD,Lido wstETH
+WETH-USD,WETH
+WBTC-USD,Wrapped Bitcoin
+LINK-USD,Chainlink
+DOT-USD,Polkadot
+TRX-USD,TRON
+WTRX-USD,Wrapped TRON
+BCH-USD,Bitcoin Cash
+NEAR-USD,NEAR Protocol
+MATIC-USD,Polygon
+UNI7083-USD,Uniswap
+LTC-USD,Litecoin
+PEPE24478-USD,Pepe
+EETH-USD,ether.fi Staked ETH
+ICP-USD,Internet Computer
+LEO-USD,UNUS SED LEO
+DAI-USD,Dai
+WEETH-USD,Wrapped eETH
+ETC-USD,Ethereum Classic
+APT21794-USD,Aptos
+RNDR-USD,Render
+BTCB-USD,Bitcoin BEP2
+EZETH-USD,Renzo Restaked ETH
+HBAR-USD,Hedera
+WHBAR-USD,Wrapped HBAR
+WBETH-USD,Wrapped Beacon ETH
+WIF-USD,dogwifhat
+ATOM-USD,Cosmos
+KAS-USD,Kaspa
+ARB11841-USD,Arbitrum
+MNT27075-USD,Mantle
+FIL-USD,Filecoin
+IMX10603-USD,Immutable
+XLM-USD,Stellar
+CRO-USD,Cronos
+eUSDE29470-USD,Ethena
+FDUSD-USD,First Digital
+AR-USD,Arweave
+GRT6719-USD,The Graph
+OKB-USD,OKB
+STX4847-USD,Stacks
 OP-USD,Optimism
-AAVE-USD,AAVE
+XMR-USD,Monero
+TAO22974-USD,Bittensor
+MKR-USD,Maker
+VET-USD,VeChain
+FLOKI-USD,FLOKI
+SUI20947-USD,Sui
+INJ-USD,Injective
+BONK-USD,Bonk
+FTM-USD,Fantom
+THETA-USD,Theta Network
+RETH-USD,Rocket Pool ETH
+LDO-USD,Lido DAO
+RUNE-USD,THORChain
+TIA22861-USD,Celestia
+BGB-USD,Bitget Token
+FET-USD,Fetch.ai
+JITOSOL-USD,Jito Staked SOL
+METH29035-USD,Mantle Staked Ether
+CORE23254-USD,Core
+ONDO-USD,Ondo
+BEAM28298-USD,Beam
+ALGO-USD,Algorand
+ZBU-USD,Zeebu
+AAVE-USD,Aave
+JUP29210-USD,Jupiter
+SEI-USD,Sei
+PYTH-USD,Pyth Network
+JASMY-USD,JasmyCoin
+STRK22691-USD,Starknet
+GALA-USD,Gala
+FLOW-USD,Flow
+ENA-USD,Ethena
+CHZ-USD,Chiliz
+BSV-USD,Bitcoin SV
+VBNB-USD,Venus BNB
+NOT-USD,Notcoin
+eSUSDE-USD,Ethena Staked
+AGIX-USD,SingularityNET
+RSETH-USD,Kelp DAO Restaked ETH
+FLR-USD,Flare
+BTT-USD,BitTorrent(New)
+AKT-USD,Akash Network
+DYDX-USD,dYdX (Native)
+WLD-USD,Worldcoin
+QNT-USD,Quant
+CHEEL-USD,Cheelee
+AXS-USD,Axie Infinity
+ORDI-USD,ORDI
+EGLD-USD,MultiversX
+W-USD,Wormhole
+NEO-USD,Neo
+SAND-USD,The Sandbox
+KCS-USD,KuCoin Token
+PENDLE-USD,Pendle
+RON14101-USD,Ronin
+XTZ-USD,Tezos
+SAFE21585-USD,Safe
+WBNB-USD,Wrapped BNB
+MINA-USD,Mina
+MSOL-USD,Marinade Staked SOL
+SNX-USD,Synthetix
+EOS-USD,EOS
+XEC-USD,eCash
+BOME-USD,BOOK OF MEME
+BRETT29743-USD,Brett
+GNO-USD,Gnosis
+CFX-USD,Conflux
+MANA-USD,Decentraland
+AIOZ-USD,AIOZ Network
+NEXO-USD,Nexo
+DOG30933-USD,DOG•GO•TO•THE•MOON
+ENS-USD,Ethereum Name Service
+GT-USD,GateToken
+APE18876-USD,ApeCoin
+KLAY-USD,Klaytn
+DEXE-USD,DeXe
+AEVO-USD,Aevo
+CAKE-USD,PancakeSwap
+USDD-USD,USDD
+CKB-USD,Nervos Network
+KAVA-USD,Kava
+1000SATS-USD,SATS
+AXL17799-USD,Axelar
+LPT-USD,Livepeer
+IOTA-USD,IOTA
+LUNC-USD,Terra Classic
+FTN-USD,Fasttoken
+SWETH-USD,swETH
+ROSE-USD,Oasis
+CBETH-USD,Coinbase Wrapped Staked ETH
+BLUR-USD,Blur
+FRAX-USD,Frax
+HNT-USD,Helium
+TRUMP27872-USD,MAGA
+PRIME23711-USD,Echelon Prime
+SFRXETH-USD,Frax Staked Ether
+TFUEL-USD,Theta Fuel
+WOO-USD,WOO
+XAUT-USD,Tether Gold
+BTG-USD,Bitcoin Gold
+MANTA-USD,Manta Network
+1INCH-USD,1inch Network
+CRV-USD,Curve DAO Token
+OSMO-USD,Osmosis
+MEME28301-USD,Memecoin
+AERO29270-USD,Aerodrome Finance
+IOTX-USD,IoTeX
+XDC-USD,XDC Network
+OM-USD,MANTRA
+ETHFI-USD,ether.fi
+ARKM-USD,Arkham
+LUNA20314-USD,Terra
+FTT-USD,FTX Token
+OCEAN-USD,Ocean Protocol
+TWT-USD,Trust Wallet Token
+ENJ-USD,Enjin Coin
+GLM-USD,Golem
+TUSD-USD,TrueUSD
+COMP5692-USD,Compound
+MOG-USD,Mog Coin
+ETHDYDX-USD,dYdX (ethDYDX)
+ASTR-USD,Astar
+ETHX-USD,Stader ETHx
+RSWETH-USD,Restaked Swell Ethereum
+SUPER8290-USD,SuperVerse
+GMT18069-USD,GMT
+RBN-USD,Ribbon Finance
+RAY-USD,Raydium
+WEMIX-USD,WEMIX
+NFT9816-USD,APENFT
+RPL-USD,Rocket Pool
+CELO-USD,Celo
+MX-USD,MX TOKEN
+ZEC-USD,Zcash
+SSV-USD,ssv.network
+JTO-USD,Jito
+ZIL-USD,Zilliqa
+SKL-USD,SKALE
+ZRX-USD,0x Protocol
+METIS-USD,Metis
+PAXG-USD,PAX Gold
+DYM-USD,Dymension
+ANKR-USD,Ankr
+GAL11877-USD,Galxe
+POPCAT28782-USD,Popcat (SOL)

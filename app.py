@@ -34,28 +34,26 @@ def inverse_transform(predictions, scaler):
 # Streamlit App
 def main():
     st.set_page_config(page_title="Sipaling", page_icon="📈", layout="wide")
-    st.title('Prediksi saham kamu yuk! 🚀')
-    
-    # Sidebar for user input
-    st.sidebar.title('📈 Sipaling')
-    st.sidebar.header('Input sahamnya dulu')
+    st.title('Sipaling 📈')
+    st.write("Paling jago prediksi dah pokonya! 🚀")
+    st.write("")
     
     # Load stock codes and company names from CSV file
     stock_codes_df = pd.read_csv('stock_codes.csv')
-    stock_options = stock_codes_df.apply(lambda row: f"{row['Kode Saham']} - {row['Nama Perusahaan']}", axis=1).tolist()
+    stock_options = stock_codes_df.apply(lambda row: f"{row['Nama']} ~ {row['Kode']}", axis=1).tolist()
     
     # Get user inputs
-    selected_option = st.sidebar.selectbox("Pilih kode saham - nama perusahaan:", stock_options)
-    selected_stock_code = selected_option.split(' - ')[0]
-    selected_stock_name = selected_option.split(' - ')[1]
-    start_date = st.sidebar.date_input("Start Date:", dt.date(2020, 1, 1))
-    end_date = st.sidebar.date_input("End Date:", dt.date.today())
-    forecast_days = st.sidebar.slider("Prediksi untuk berapa hari ke depan:", min_value=1, max_value=100, value=120)
+    selected_option = st.selectbox("Pilih Asset", stock_options)
+    selected_stock_code = selected_option.split(' ~ ')[1]
+    selected_stock_name = selected_option.split(' ~ ')[0]
+    start_date = st.date_input("Start Date", dt.date(2020, 1, 1))
+    end_date = st.date_input("End Date", dt.date.today())
+    forecast_days = st.slider("Prediksi untuk berapa hari ke depan:", min_value=1, max_value=100, value=100)
     
     model = load_model('stock_dl_model.h5')
     
     # Button to trigger prediction
-    if st.sidebar.button("Prediksi"):
+    if st.button("Prediksi"):
         if model is not None:
             # Fetch stock data from Yahoo Finance
             stock_data = fetch_stock_data(selected_stock_code, start_date, end_date)
@@ -86,10 +84,17 @@ def main():
             forecast = inverse_transform(np.array(forecast).reshape(-1, 1), scaler)
             fig.add_trace(go.Scatter(x=forecast_dates, y=forecast.flatten(), mode='lines', name=f'Prediksi Harga ({forecast_days} hari)'))
             
-            fig.update_layout(title=f'Prediksi harga saham {selected_stock_code} - {selected_stock_name} selama {forecast_days} hari ke depan',
-                              xaxis_title='Tanggal',
-                              yaxis_title='Harga')
+            st.write("")
+            st.write(f'**Prediksi harga {selected_stock_name} ({selected_stock_code}) selama {forecast_days} hari ke depan**')
+            
+            fig.update_layout(showlegend=False)
             st.plotly_chart(fig)
+
+    st.write("")
+    st.write("")
+    st.write("")
+    st.markdown("<p style='text-align: center;'>Anw di kanan atas ada repository githubnya, jangan lupa contribute ya 😃</p>", unsafe_allow_html=True)
+
 
 # Run the app
 if __name__ == '__main__':
