@@ -2,7 +2,7 @@ streamlit
 pandas
 numpy
 yfinance
-tensorflow==2.7.0
+tensorflow==2.13.0
 scikit-learn
 plotly
 matplotlib
