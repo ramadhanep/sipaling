@@ -14,6 +14,18 @@ def fetch_stock_data(stock_code, start_date, end_date):
     data = yf.download(stock_code, start=start_date, end=end_date)
     return data
 
+# Fetch news from Yahoo Finance
+def fetch_news(stock_code, num_news):
+    news_list = yf.Ticker(stock_code).news
+    news_data = []
+    for news_item in news_list[:num_news]:
+        publisher = news_item.get('publisher', '')
+        title = news_item.get('title', '')
+        image = news_item.get('thumbnail', {}).get('resolutions', [{}])[0].get('url', '')
+        link = news_item.get('link', '')
+        news_data.append({'publisher': publisher, 'title': title, 'image': image, 'link': link})
+    return pd.DataFrame(news_data)
+
 # Preprocess data for LSTM model
 def preprocess_data(data, sequence_length=100):
     scaler = MinMaxScaler(feature_range=(0, 1))
@@ -34,25 +46,26 @@ def inverse_transform(predictions, scaler):
 
 # Streamlit App
 def main():
+    # Load stock codes and company names from CSV file
+    stock_codes_df = pd.read_csv('stock_codes.csv')
+
     st.set_page_config(page_title="Sipaling", page_icon="📈", layout="wide")
     st.title('Sipaling 📈')
     st.write("")
     
     # Menu for selecting the mode of the app
-    mode = option_menu(None, ["Home", "Info"], 
-    icons=['house', 'info-circle'], 
+    mode = option_menu(None, ["Home", "News", "Info"], 
+    icons=['house', 'newspaper', 'info-circle'], 
     menu_icon="cast", default_index=0, orientation="horizontal")
     
     if mode == "Home":
-        # Load stock codes and company names from CSV file
-        stock_codes_df = pd.read_csv('stock_codes.csv')
         stock_options = stock_codes_df.apply(lambda row: f"{row['Nama']} ~ {row['Kode']}", axis=1).tolist()
         
         # Get user inputs
         selected_option = st.selectbox("Pilih Asset", stock_options)
         selected_stock_code = selected_option.split(' ~ ')[1]
         selected_stock_name = selected_option.split(' ~ ')[0]
-        start_date = st.date_input("Start Date", dt.date(2024, 1, 1))
+        start_date = st.date_input("Start Date", dt.date(2023, 1, 1))
         end_date = st.date_input("End Date", dt.date.today())
         forecast_days = st.slider("Prediksi untuk berapa hari ke depan", min_value=1, max_value=100, value=100)
         
@@ -108,7 +121,30 @@ def main():
                 
                 fig.update_layout(showlegend=False)
                 st.plotly_chart(fig)
-    
+
+    elif mode == "News":
+        stock_options = stock_codes_df.apply(lambda row: f"{row['Nama']} ~ {row['Kode']}", axis=1).tolist()
+        
+        # Get user inputs
+        selected_option = st.selectbox("Pilih Asset", stock_options)
+        selected_stock_code = selected_option.split(' ~ ')[1]
+        selected_stock_name = selected_option.split(' ~ ')[0]
+        news = fetch_news(selected_stock_code, 10)
+        
+        if not news.empty:
+            st.write(f"### Berita Terbaru tentang {selected_stock_name} ({selected_stock_code})")
+            for index, row in news.iterrows():
+                st.write("---")
+                st.write(f"**{row['publisher']}**")
+                if row['image']:  # Check if the image URL is not empty
+                    st.image(row['image'], width=400)
+                st.write(f"### {row['title']}")
+                st.write(f"[Baca Berita Lengkap]({row['link']})")
+        else:
+            st.write("Tidak ada berita terbaru untuk aset ini.")
+
+
+
     elif mode == "Info":
         st.write("Sipaling adalah aplikasi prediksi harga aset finansial yang inovatif dan canggih, mencakup baik saham maupun cryptocurrency. Dengan menggunakan teknologi machine learning dan analisis data terkini, Sipaling memberikan kamu kemampuan untuk meramalkan pergerakan harga aset dengan akurasi tinggi. Aplikasi ini dirancang untuk para investor, trader, dan semua orang yang tertarik dalam dunia keuangan.")
         st.write("Dengan Sipaling, kamu dapat memilih berbagai aset saham dari berbagai perusahaan terkemuka, serta cryptocurrency populer seperti Bitcoin, Ethereum, dan lainnya. Aplikasi ini memberikan kamu fleksibilitas untuk memilih rentang waktu tertentu, mulai dari beberapa hari hingga beberapa bulan, untuk melakukan prediksi harga aset.")
