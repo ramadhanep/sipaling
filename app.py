@@ -52,7 +52,7 @@ def main():
         selected_option = st.selectbox("Pilih Asset", stock_options)
         selected_stock_code = selected_option.split(' ~ ')[1]
         selected_stock_name = selected_option.split(' ~ ')[0]
-        start_date = st.date_input("Start Date", dt.date(2020, 1, 1))
+        start_date = st.date_input("Start Date", dt.date(2024, 1, 1))
         end_date = st.date_input("End Date", dt.date.today())
         forecast_days = st.slider("Prediksi untuk berapa hari ke depan", min_value=1, max_value=100, value=100)
         
@@ -75,8 +75,17 @@ def main():
                 
                 # Plot actual prices and predictions using Plotly
                 fig = go.Figure()
-                fig.add_trace(go.Scatter(x=stock_data.index, y=stock_data['Close'], mode='lines', name='Harga Saham', line=dict(color='#FFFFFF')))
-                fig.add_trace(go.Scatter(x=stock_data.index[100:], y=predictions.flatten(), mode='lines', name='Prediksi Harga', line=dict(color='#FF4B4B')))
+                fig.add_trace(go.Candlestick(x=stock_data.index, 
+                                             open=stock_data['Open'], 
+                                             high=stock_data['High'], 
+                                             low=stock_data['Low'], 
+                                             close=stock_data['Close'], 
+                                             name='Harga Saham'))
+                fig.add_trace(go.Scatter(x=stock_data.index[100:], 
+                                         y=predictions.flatten(), 
+                                         mode='lines', 
+                                         name='Prediksi Harga', 
+                                         line=dict(color='#FF4B4B')))
                 
                 # Forecast for the next N days
                 forecast_dates = pd.date_range(start=end_date + dt.timedelta(days=1), periods=forecast_days)
@@ -88,7 +97,11 @@ def main():
                     last_sequence[-1] = forecast[-1]
                 
                 forecast = inverse_transform(np.array(forecast).reshape(-1, 1), scaler)
-                fig.add_trace(go.Scatter(x=forecast_dates, y=forecast.flatten(), mode='lines', name=f'Prediksi Harga', line=dict(color='#FF4B4B')))
+                fig.add_trace(go.Scatter(x=forecast_dates, 
+                                         y=forecast.flatten(), 
+                                         mode='lines', 
+                                         name=f'Prediksi Harga', 
+                                         line=dict(color='#FF4B4B')))
                 
                 st.write("")
                 st.write(f'**Prediksi harga {selected_stock_name} ({selected_stock_code}) selama {forecast_days} hari ke depan**')
@@ -102,7 +115,8 @@ def main():
         st.write("Fitur unggulan dari Sipaling adalah kemampuannya untuk menghasilkan prediksi harga aset untuk periode yang akan datang. Dengan menggunakan teknik deep learning dan analisis data historis, Sipaling memberikan kamu gambaran yang jelas tentang kemungkinan pergerakan harga aset ke depan.")
         st.write("Tidak hanya itu, Sipaling juga dilengkapi dengan antarmuka yang ramah pengguna dan visualisasi data interaktif, sehingga kamu dapat dengan mudah memahami dan menganalisis tren pasar saham dan cryptocurrency.")
         st.write("\n")
-        st.write("Created by Ramadhan 😎")
+        st.write("Thanks to Ramadhan 🙏🏻")
+        st.write("its free for everyone")
 
 # Run the app
 if __name__ == '__main__':
