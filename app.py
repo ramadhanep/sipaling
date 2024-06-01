@@ -137,9 +137,9 @@ def main():
                 st.write("---")
                 st.write(f"**{row['publisher']}**")
                 if row['image']:  # Check if the image URL is not empty
-                    st.image(row['image'], width=400)
-                st.write(f"### {row['title']}")
-                st.write(f"[Baca Berita Lengkap]({row['link']})")
+                    st.image(row['image'], width=200)
+                st.write(f"#### {row['title']}")
+                st.write(f"[Baca sekarang]({row['link']})")
         else:
             st.write("Tidak ada berita terbaru untuk aset ini.")
 
@@ -150,7 +150,7 @@ def main():
         st.write("Dengan Sipaling, kamu dapat memilih berbagai aset saham dari berbagai perusahaan terkemuka, serta cryptocurrency populer seperti Bitcoin, Ethereum, dan lainnya. Aplikasi ini memberikan kamu fleksibilitas untuk memilih rentang waktu tertentu, mulai dari beberapa hari hingga beberapa bulan, untuk melakukan prediksi harga aset.")
         st.write("Fitur unggulan dari Sipaling adalah kemampuannya untuk menghasilkan prediksi harga aset untuk periode yang akan datang. Dengan menggunakan teknik deep learning dan analisis data historis, Sipaling memberikan kamu gambaran yang jelas tentang kemungkinan pergerakan harga aset ke depan.")
         st.write("Tidak hanya itu, Sipaling juga dilengkapi dengan antarmuka yang ramah pengguna dan visualisasi data interaktif, sehingga kamu dapat dengan mudah memahami dan menganalisis tren pasar saham dan cryptocurrency.")
-        st.write("\n")
+        st.write("---")
         st.write("Thanks to Ramadhan 🙏🏻")
         st.write("its free for everyone")
 
