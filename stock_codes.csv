@@ -1,13 +1,28 @@
 Kode,Nama
 BTC-USD,Bitcoin
-^GSPC,S&P 500
-IDR=X,USD/IDR
-BBCA.JK,Bank Central Asia
-BBRI.JK,Bank Rakyat Indonesia
-BMRI.JK,Bank Mandiri
-BBNI.JK,Bank Negara Indonesia
 SOL-USD,Solana
 ETH-USD,Ethereum
+SPY,SPDR S&P 500 ETF Trust
+QQQ,Nasdaq Invesco QQQ Trust
+NVDA,NVIDIA Corporation
+AVGO,Broadcom Inc.
+AMD,Advanced Micro Devices
+QCOM,QUALCOMM Incorporated
+AAPL,Apple Inc.
+MSFT,Microsoft Corporation
+IDR=X,USD/IDR
+BREN.JK,PT Barito Renewables Energy Tbk.
+BBCA.JK,PT Bank Central Asia Tbk.
+BBRI.JK,PT Bank Rakyat Indonesia Tbk.
+BMRI.JK,PT Bank Mandiri Tbk.
+BBNI.JK,PT Bank Negara Indonesia Tbk.
+BRIS.JK,PT Bank Syariah Indonesia Tbk.
+ASII.JK,PT Astra International Tbk.
+TPIA.JK,PT Chandra Asri Pacific Tbk
+AMMN.JK,PT Amman Mineral Internasional Tbk.
+TLKM.JK,PT Telekomunikasi Indonesia Tbk.
+ANTM.JK,PT Aneka Tambang Tbk.
+PGAS.JK,PT Perusahaan Gas Negara Tbk.
 USDT-USD,Tether
 BNB-USD,BNB
 STETH-USD,Lido Staked ETH
