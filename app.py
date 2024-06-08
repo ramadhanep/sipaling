@@ -50,6 +50,17 @@ def main():
     stock_codes_df = pd.read_csv('stock_codes.csv')
 
     st.set_page_config(page_title="Sipaling", page_icon="📈", layout="wide")
+    
+    # Apply custom CSS for centering and max-width
+    st.markdown("""
+        <style>
+        .main {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     st.title('Sipaling 📈')
     st.write("")
     
@@ -142,8 +153,6 @@ def main():
                 st.write(f"[Baca sekarang]({row['link']})")
         else:
             st.write("Tidak ada berita terbaru untuk aset ini.")
-
-
 
     elif mode == "Info":
         st.write("Sipaling adalah aplikasi prediksi harga aset finansial yang inovatif dan canggih, mencakup baik saham maupun cryptocurrency. Dengan menggunakan teknologi machine learning dan analisis data terkini, Sipaling memberikan kamu kemampuan untuk meramalkan pergerakan harga aset dengan akurasi tinggi. Aplikasi ini dirancang untuk para investor, trader, dan semua orang yang tertarik dalam dunia keuangan.")
