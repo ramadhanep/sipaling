@@ -6,6 +6,7 @@ import plotly.graph_objs as go
 import yfinance as yf
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 from streamlit_option_menu import option_menu
 
@@ -27,7 +28,7 @@ def fetch_news(stock_code, num_news):
     return pd.DataFrame(news_data)
 
 # Preprocess data for LSTM model
-def preprocess_data(data, sequence_length=100):
+def preprocess_data(data, sequence_length=60):
     scaler = MinMaxScaler(feature_range=(0, 1))
     scaled_data = scaler.fit_transform(data.values.reshape(-1, 1))
     
@@ -78,9 +79,9 @@ def main():
         selected_stock_name = selected_option.split(' ~ ')[0]
         start_date = st.date_input("Start Date", dt.date(2023, 1, 1))
         end_date = st.date_input("End Date", dt.date.today())
-        forecast_days = st.slider("Prediksi untuk berapa hari ke depan", min_value=1, max_value=100, value=100)
+        forecast_days = st.slider("Prediksi untuk berapa hari ke depan", min_value=1, max_value=60, value=60)
         
-        model = load_model('stock_dl_model.h5')
+        model = load_model('sipaling_model_v1.h5')
         
         # Button to trigger prediction
         if st.button("Prediksi"):
@@ -97,19 +98,26 @@ def main():
                 # Inverse transform predictions
                 predictions = inverse_transform(predictions, scaler)
                 
+                # Calculate RMSE
+                rmse = np.sqrt(mean_squared_error(stock_data['Close'][60:], predictions.flatten()))
+                
+                # Calculate win rate
+                actual_returns = np.diff(stock_data['Close'][60:]).flatten()
+                predicted_returns = np.diff(predictions.flatten())
+                win_rate = np.mean((actual_returns * predicted_returns) > 0) * 100
+                
                 # Plot actual prices and predictions using Plotly
                 fig = go.Figure()
-                fig.add_trace(go.Candlestick(x=stock_data.index, 
-                                             open=stock_data['Open'], 
-                                             high=stock_data['High'], 
-                                             low=stock_data['Low'], 
-                                             close=stock_data['Close'], 
-                                             name='Harga Saham'))
-                fig.add_trace(go.Scatter(x=stock_data.index[100:], 
-                                         y=predictions.flatten(), 
-                                         mode='lines', 
-                                         name='Prediksi Harga', 
-                                         line=dict(color='#FF4B4B')))
+                fig.add_trace(go.Scatter(x=stock_data.index,
+                                            y=stock_data['Close'],
+                                            mode='lines',
+                                            name='Harga Saham',
+                                        line=dict(color='#5941FF')))
+                fig.add_trace(go.Scatter(x=stock_data.index[60:], 
+                                        y=predictions.flatten(), 
+                                        mode='lines', 
+                                        name='Prediksi Harga',
+                                        line=dict(color='#C8FF16')))
                 
                 # Forecast for the next N days
                 forecast_dates = pd.date_range(start=end_date + dt.timedelta(days=1), periods=forecast_days)
@@ -122,16 +130,20 @@ def main():
                 
                 forecast = inverse_transform(np.array(forecast).reshape(-1, 1), scaler)
                 fig.add_trace(go.Scatter(x=forecast_dates, 
-                                         y=forecast.flatten(), 
-                                         mode='lines', 
-                                         name=f'Prediksi Harga', 
-                                         line=dict(color='#FF4B4B')))
+                                        y=forecast.flatten(), 
+                                        mode='lines', 
+                                        name=f'Prediksi Harga', 
+                                        line=dict(color='#C8FF16')))
                 
                 st.write("")
                 st.write(f'**Prediksi harga {selected_stock_name} ({selected_stock_code}) selama {forecast_days} hari ke depan**')
                 
                 fig.update_layout(showlegend=False)
                 st.plotly_chart(fig)
+
+                st.metric(label="Win Rate", value=f"{win_rate:.2f}%")
+                st.metric(label="RMSE", value=f"{rmse:.2f}")
+
 
     elif mode == "News":
         stock_options = stock_codes_df.apply(lambda row: f"{row['Nama']} ~ {row['Kode']}", axis=1).tolist()
@@ -155,13 +167,8 @@ def main():
             st.write("Tidak ada berita terbaru untuk aset ini.")
 
     elif mode == "Info":
-        st.write("Sipaling adalah aplikasi prediksi harga aset finansial yang inovatif dan canggih, mencakup baik saham maupun cryptocurrency. Dengan menggunakan teknologi machine learning dan analisis data terkini, Sipaling memberikan kamu kemampuan untuk meramalkan pergerakan harga aset dengan akurasi tinggi. Aplikasi ini dirancang untuk para investor, trader, dan semua orang yang tertarik dalam dunia keuangan.")
-        st.write("Dengan Sipaling, kamu dapat memilih berbagai aset saham dari berbagai perusahaan terkemuka, serta cryptocurrency populer seperti Bitcoin, Ethereum, dan lainnya. Aplikasi ini memberikan kamu fleksibilitas untuk memilih rentang waktu tertentu, mulai dari beberapa hari hingga beberapa bulan, untuk melakukan prediksi harga aset.")
-        st.write("Fitur unggulan dari Sipaling adalah kemampuannya untuk menghasilkan prediksi harga aset untuk periode yang akan datang. Dengan menggunakan teknik deep learning dan analisis data historis, Sipaling memberikan kamu gambaran yang jelas tentang kemungkinan pergerakan harga aset ke depan.")
-        st.write("Tidak hanya itu, Sipaling juga dilengkapi dengan antarmuka yang ramah pengguna dan visualisasi data interaktif, sehingga kamu dapat dengan mudah memahami dan menganalisis tren pasar saham dan cryptocurrency.")
+        st.write("Sipaling adalah aplikasi inovatif yang dikembangkan untuk memprediksi harga saham menggunakan teknologi machine learning.")
         st.write("---")
-        st.write("Thanks to Ramadhan 🙏🏻")
-        st.write("its free for everyone")
 
 # Run the app
 if __name__ == '__main__':
